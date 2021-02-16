@@ -15,6 +15,7 @@ if(!empty($_POST)){
 	 $error['password'] = 'blank';
  }
  if(empty($error)){
+	 $image = date('YmdHis').$_FILES['image']['name'];
 	 $_SESSION['join'] = $_POST;
 	 header('Location: check.php');
 	 exit();
