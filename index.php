@@ -12,6 +12,22 @@ if(isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()){
    header('Location: login.php');
    exit();
  }
+ if(!empty($_POST)){
+  if($_POST['message'] !==''){
+    if(!isset($_REQUEST['res'])){
+      $_POST['reply_post_id']=0;
+    }
+    $message = $db->prepare('INSERT INTO posts SET member_id=?,message=?,reply_message_id=?, created=NOW()');
+    $message->execute(array(
+      $member['id'],
+      $_POST['message'],
+      $_POST['reply_post_id']
+    ));
+
+    header('Location: index.php');
+    exit();
+  }
+}
  ?>
 <!DOCTYPE html>
 <html lang="ja">
